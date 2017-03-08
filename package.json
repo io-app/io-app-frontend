@@ -7,12 +7,19 @@
     "react-dom": "^15.4.2"
   },
   "devDependencies": {
-    "react-scripts": "0.9.4"
+    "babel-eslint": "^7.1.1",
+    "react-scripts": "0.9.4",
+    "standard": "^9.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "./node_modules/.bin/standard",
+    "lint-fix": "./node_modules/.bin/standard --fix"
+  },
+  "standard": {
+    "parser": "babel-eslint"
   }
 }
