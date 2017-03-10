@@ -19,6 +19,12 @@ const styles = {
 class LoginForm extends Component {
   handleUserChange = e => this.setState({user: e.target.value})
   handlePasswordChange = e => this.setState({password: e.target.value})
+  handleSubmit = e => {
+    e.preventDefault()
+    if (this.props.onLogin) {
+      this.props.onLogin(this.state.user, this.state.password)
+    }
+  }
 
   state = {
     user: '',
