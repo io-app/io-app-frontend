@@ -24,22 +24,26 @@ const firebaseConfig = {
 }
 
 class App extends Component {
-  componentDidMount () {
-    firebase.initializeApp(firebaseConfig)
-  }
-
-  login (user, password) {
+  login = (user, password) => {
     firebase.auth()
       .signInWithEmailAndPassword(user, password)
-      .then(user => console.log(user))
-      .catch(error => console.log(error))
+      .then(user => this.setState({loginError: undefined}))
+      .catch(error => this.setState({loginError: error.code}))
+  }
+
+  state = {
+    loginError: undefined
+  }
+
+  componentDidMount () {
+    firebase.initializeApp(firebaseConfig)
   }
 
   render () {
     return (
       <MuiThemeProvider>
         <div style={styles.main}>
-          <LoginForm onLogin={this.login} />
+          <LoginForm onLogin={this.login} loginError={this.state.loginError} />
         </div>
       </MuiThemeProvider>
     )

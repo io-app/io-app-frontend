@@ -32,6 +32,8 @@ class LoginForm extends Component {
   }
 
   render () {
+    const {loginError} = this.props
+
     return (
       <Card>
         <CardTitle
@@ -42,7 +44,8 @@ class LoginForm extends Component {
               <TextField
                 floatingLabelText='Username'
                 value={this.state.user}
-                onChange={this.handleUserChange} />
+                onChange={this.handleUserChange}
+                errorText={loginError} />
             </div>
             <div style={styles.input} >
               <TextField
