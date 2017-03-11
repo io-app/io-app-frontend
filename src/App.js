@@ -47,6 +47,12 @@ class App extends Component {
 
   componentDidMount () {
     firebase.initializeApp(firebaseConfig)
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({loginError: undefined, authenticated: true})
+      }
+    })
   }
 
   render () {
