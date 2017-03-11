@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
+import {Card, CardActions, CardTitle} from 'material-ui/Card'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
