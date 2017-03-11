@@ -35,8 +35,6 @@ class LoginForm extends Component {
   render () {
     const {loginError, authenticated} = this.props
 
-    console.log(authenticated)
-
     return (
       authenticated
       ? <Redirect to={{pathname: '/'}} />
