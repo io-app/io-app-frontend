@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import LoginForm from './components/LoginForm'
+import Dashboard from './components/Dashboard'
 import { cyan500 } from 'material-ui/styles/colors'
 import firebase from 'firebase'
 
@@ -60,7 +61,7 @@ class App extends Component {
       <Router>
         <MuiThemeProvider>
           <div style={styles.main}>
-            <PrivateRoute exact path='/' authenticated={this.state.authenticated} component={props => <div>Hello</div>} />
+            <PrivateRoute exact path='/' authenticated={this.state.authenticated} component={Dashboard} />
             <Route path='/login' render={props =>
               <LoginForm
                 onLogin={this.login}
