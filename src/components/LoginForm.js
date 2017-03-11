@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Redirect} from 'react-router-dom'
 import {Card, CardActions, CardTitle} from 'material-ui/Card'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -32,10 +33,14 @@ class LoginForm extends Component {
   }
 
   render () {
-    const {loginError} = this.props
+    const {loginError, authenticated} = this.props
+
+    console.log(authenticated)
 
     return (
-      <Card>
+      authenticated
+      ? <Redirect to={{pathname: '/'}} />
+      : <Card>
         <CardTitle
           title='Levy system' />
         <form className='commentForm' onSubmit={this.handleSubmit}>
