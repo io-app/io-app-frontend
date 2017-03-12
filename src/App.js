@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import LoginForm from './components/LoginForm'
 import Dashboard from './components/Dashboard'
-import { cyan500 } from 'material-ui/styles/colors'
 import firebase from 'firebase'
 
 const PrivateRoute = ({component, authenticated, ...rest}) => (
@@ -13,17 +12,6 @@ const PrivateRoute = ({component, authenticated, ...rest}) => (
       : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
   )} />
 )
-
-const styles = {
-  main: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: cyan500
-  }
-}
 
 const firebaseConfig = {
   apiKey: 'AIzaSyC9nbhtDMP9_59eoNGFmWJwbRwkCG_bYSo',
@@ -60,14 +48,14 @@ class App extends Component {
     return (
       <Router>
         <MuiThemeProvider>
-          <div style={styles.main}>
+          <Switch>
             <PrivateRoute exact path='/' authenticated={this.state.authenticated} component={Dashboard} />
             <Route path='/login' render={props =>
               <LoginForm
                 onLogin={this.login}
                 loginError={this.state.loginError}
                 authenticated={this.state.authenticated} />} />
-          </div>
+          </Switch>
         </MuiThemeProvider>
       </Router>
     )
