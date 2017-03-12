@@ -5,6 +5,8 @@ import {List, ListItem} from 'material-ui/List'
 import ContentInbox from 'material-ui/svg-icons/content/inbox'
 import ActionGrade from 'material-ui/svg-icons/action/grade'
 import ContentDrafts from 'material-ui/svg-icons/content/drafts'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import ContentAdd from 'material-ui/svg-icons/content/add'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
 import firebase from 'firebase'
 
@@ -23,6 +25,11 @@ const styles = {
   drawer: {
     minWidth: '200px',
     paddingRight: '20px'
+  },
+  floatingButton: {
+    position: 'absolute',
+    bottom: '40px',
+    right: '40px'
   }
 }
 
@@ -86,6 +93,9 @@ class Dashboard extends Component {
               </TableRow>
             </TableBody>
           </Table>
+          <FloatingActionButton secondary style={styles.floatingButton}>
+            <ContentAdd />
+          </FloatingActionButton>
         </div>
       </div>
     )
