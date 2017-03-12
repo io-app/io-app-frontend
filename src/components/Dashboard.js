@@ -27,9 +27,9 @@ const styles = {
     paddingRight: '20px'
   },
   floatingButton: {
-    position: 'absolute',
-    bottom: '40px',
-    right: '40px'
+    position: 'fixed',
+    bottom: '25px',
+    right: '25px'
   }
 }
 
@@ -93,7 +93,7 @@ class Dashboard extends Component {
               </TableRow>
             </TableBody>
           </Table>
-          <FloatingActionButton secondary style={styles.floatingButton}>
+          <FloatingActionButton style={styles.floatingButton}>
             <ContentAdd />
           </FloatingActionButton>
         </div>
