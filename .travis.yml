@@ -6,6 +6,6 @@ cache: yarn
 script:
   - yarn build
 
-deploy:
+after_success:
   - yarn global add firebase-tools
   - firebase deploy --token=${FIREBASE_TOKEN}
