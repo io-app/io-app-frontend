@@ -8,6 +8,10 @@ import ContentDrafts from 'material-ui/svg-icons/content/drafts'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import Dialog from 'material-ui/Dialog'
+import DatePicker from 'material-ui/DatePicker'
+import SelectField from 'material-ui/SelectField'
+import MenuItem from 'material-ui/MenuItem'
+import TextField from 'material-ui/TextField'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
 import firebase from 'firebase'
 
@@ -40,7 +44,8 @@ class Dashboard extends Component {
 
   state = {
     drawerOpen: false,
-    dialogOpen: false
+    dialogOpen: false,
+    selectedCategory: undefined
   }
 
   render () {
@@ -119,7 +124,20 @@ class Dashboard extends Component {
             modal
             open={this.state.dialogOpen}
           >
-            Only actions can close this dialog.
+            Please enter the details of the receipt:
+            <DatePicker hintText='Receipt date' floatingLabelText='Receipt date' />
+            <SelectField
+              floatingLabelText='Category'
+              value={this.state.selectedCategory}
+              onChange={(event, index, value) => this.setState({selectedCategory: value})}
+            >
+              <MenuItem value={1} primaryText='Workers' />
+              <MenuItem value={2} primaryText='Projects' />
+              <MenuItem value={3} primaryText='Misc' />
+            </SelectField><br />
+            <TextField
+              floatingLabelText='Amount'
+            />
           </Dialog>
         </div>
       </div>
