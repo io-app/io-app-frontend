@@ -39,7 +39,7 @@ class Dashboard extends Component {
   handleClose = () => this.setState({dialogOpen: false})
 
   state = {
-    drawerOpen: true,
+    drawerOpen: false,
     dialogOpen: false
   }
 
