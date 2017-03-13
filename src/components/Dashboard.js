@@ -7,6 +7,7 @@ import ActionGrade from 'material-ui/svg-icons/action/grade'
 import ContentDrafts from 'material-ui/svg-icons/content/drafts'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
+import Dialog from 'material-ui/Dialog'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
 import firebase from 'firebase'
 
@@ -35,12 +36,28 @@ const styles = {
 
 class Dashboard extends Component {
   toggleDrawer = () => this.setState({drawerOpen: !this.state.drawerOpen})
+  handleClose = () => this.setState({dialogOpen: false})
 
   state = {
-    drawerOpen: true
+    drawerOpen: true,
+    dialogOpen: false
   }
 
   render () {
+    const actions = [
+      <FlatButton
+        label='Cancel'
+        primary
+        onTouchTap={this.handleClose}
+      />,
+      <FlatButton
+        label='Add Receipt'
+        primary
+        disabled
+        onTouchTap={this.handleClose}
+      />
+    ]
+
     return (
       <div style={styles.main}>
         <AppBar
@@ -93,9 +110,17 @@ class Dashboard extends Component {
               </TableRow>
             </TableBody>
           </Table>
-          <FloatingActionButton style={styles.floatingButton}>
+          <FloatingActionButton style={styles.floatingButton} onClick={() => this.setState({dialogOpen: true})}>
             <ContentAdd />
           </FloatingActionButton>
+          <Dialog
+            title='Add new receipt'
+            actions={actions}
+            modal
+            open={this.state.dialogOpen}
+          >
+            Only actions can close this dialog.
+          </Dialog>
         </div>
       </div>
     )
