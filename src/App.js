@@ -21,6 +21,18 @@ const firebaseConfig = {
   messagingSenderId: '191648874197'
 }
 
+const firebaseDevConfig = {
+  apiKey: 'AIzaSyCvVhKa728KFDMwIFtxvlYwJRx5sPnBvuw',
+  authDomain: 'levy-system-dev.firebaseapp.com',
+  databaseURL: 'https://levy-system-dev.firebaseio.com',
+  storageBucket: 'levy-system-dev.appspot.com',
+  messagingSenderId: '260126814034'
+}
+
+const getConfig = () => window.location.hostname.startsWith('levy-system')
+? firebaseConfig
+: firebaseDevConfig
+
 class App extends Component {
   login = (user, password) => {
     firebase.auth()
@@ -35,7 +47,7 @@ class App extends Component {
   }
 
   componentDidMount () {
-    firebase.initializeApp(firebaseConfig)
+    firebase.initializeApp(getConfig())
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
