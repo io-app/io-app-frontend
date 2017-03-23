@@ -8,4 +8,5 @@ script:
 
 after_success:
   - yarn global add firebase-tools
-  - firebase deploy --token=${FIREBASE_TOKEN}
+  - firebase deploy --token=${FIREBASE_TOKEN} -P default
+  - firebase deploy --token=${FIREBASE_TOKEN} -P dev

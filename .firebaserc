@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "nors-bc71d"
+    "default": "nors-bc71d",
+    "dev": "levy-system-dev"
   }
 }
