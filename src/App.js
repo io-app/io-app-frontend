@@ -32,6 +32,8 @@ class App extends Component {
   componentDidMount () {
     feathers.authenticate()
       .then(result => this.setState({loginError: undefined, authenticated: true}))
+
+    feathers.on('logout', () => this.setState({authenticated: false}))
   }
 
   render () {

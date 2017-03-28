@@ -13,6 +13,7 @@ import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import TextField from 'material-ui/TextField'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
+import feathers from '../lib/feathers'
 
 const styles = {
   main: {
@@ -66,7 +67,7 @@ class Dashboard extends Component {
       <div style={styles.main}>
         <AppBar
           title='Dashboard'
-          iconElementRight={<FlatButton label='Logout' onClick={() => console.log('TODO: logout')} />}
+          iconElementRight={<FlatButton label='Logout' onClick={() => feathers.logout().then(feathers.emit('logout'))} />}
           onLeftIconButtonTouchTap={this.toggleDrawer}
         />
         <div style={styles.content}>
