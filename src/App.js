@@ -3,7 +3,8 @@ import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import LoginForm from './components/LoginForm'
 import Dashboard from './components/Dashboard'
-import firebase from 'firebase'
+import feathers from 'feathers-client'
+import io from 'socket.io-client'
 
 const PrivateRoute = ({component, authenticated, ...rest}) => (
   <Route {...rest} render={props => (
@@ -13,32 +14,34 @@ const PrivateRoute = ({component, authenticated, ...rest}) => (
   )} />
 )
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyC9nbhtDMP9_59eoNGFmWJwbRwkCG_bYSo',
-  authDomain: 'nors-bc71d.firebaseapp.com',
-  databaseURL: 'https://nors-bc71d.firebaseio.com',
-  storageBucket: 'nors-bc71d.appspot.com',
-  messagingSenderId: '191648874197'
+const prodConfig = {
+  appURL: 'https://io-app-backend.now.sh'
 }
 
-const firebaseDevConfig = {
-  apiKey: 'AIzaSyCvVhKa728KFDMwIFtxvlYwJRx5sPnBvuw',
-  authDomain: 'levy-system-dev.firebaseapp.com',
-  databaseURL: 'https://levy-system-dev.firebaseio.com',
-  storageBucket: 'levy-system-dev.appspot.com',
-  messagingSenderId: '260126814034'
+const devConfig = {
+  appURL: 'http://localhost:3030'
 }
 
 const getConfig = () => window.location.hostname.startsWith('levy-system')
-? firebaseConfig
-: firebaseDevConfig
+? prodConfig
+: devConfig
+
+const socket = io(getConfig().appURL)
+
+const app = feathers()
+app.configure(feathers.hooks())
+app.configure(feathers.socketio(socket))
+app.configure(feathers.authentication({ storage: window.localStorage }))
 
 class App extends Component {
   login = (user, password) => {
-    firebase.auth()
-      .signInWithEmailAndPassword(user, password)
-      .then(user => this.setState({loginError: undefined, authenticated: true}))
-      .catch(error => this.setState({loginError: error.code}))
+    app.authenticate({
+      type: 'local',
+      email: user,
+      password
+    })
+    .then(result => this.setState({loginError: undefined, authenticated: true}))
+    .catch(error => this.setState({loginError: error.message}))
   }
 
   state = {
@@ -47,15 +50,8 @@ class App extends Component {
   }
 
   componentDidMount () {
-    firebase.initializeApp(getConfig())
-
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.setState({loginError: undefined, authenticated: true})
-      } else {
-        this.setState({authenticated: false})
-      }
-    })
+    app.authenticate()
+      .then(result => this.setState({loginError: undefined, authenticated: true}))
   }
 
   render () {

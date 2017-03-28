@@ -1,14 +1,15 @@
 {
-  "name": "levy-system",
+  "name": "io-app-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "^3.7.1",
+    "feathers-client": "^1.9.0",
     "material-ui": "^0.17.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router-dom": "^4.0.0",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-tap-event-plugin": "^2.0.1",
+    "socket.io-client": "^1.7.3"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",

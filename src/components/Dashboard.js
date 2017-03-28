@@ -13,7 +13,6 @@ import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import TextField from 'material-ui/TextField'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
-import firebase from 'firebase'
 
 const styles = {
   main: {
@@ -67,7 +66,7 @@ class Dashboard extends Component {
       <div style={styles.main}>
         <AppBar
           title='Dashboard'
-          iconElementRight={<FlatButton label='Logout' onClick={() => firebase.auth().signOut()} />}
+          iconElementRight={<FlatButton label='Logout' onClick={() => console.log('TODO: logout')} />}
           onLeftIconButtonTouchTap={this.toggleDrawer}
         />
         <div style={styles.content}>

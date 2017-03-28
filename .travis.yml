@@ -5,8 +5,3 @@ cache: yarn
 
 script:
   - yarn build
-
-after_success:
-  - yarn global add firebase-tools
-  - firebase deploy --token=${FIREBASE_TOKEN} -P default
-  - firebase deploy --token=${FIREBASE_TOKEN} -P dev
