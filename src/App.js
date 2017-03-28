@@ -22,9 +22,9 @@ const devConfig = {
   appURL: 'http://localhost:3030'
 }
 
-const getConfig = () => window.location.hostname.startsWith('levy-system')
-? prodConfig
-: devConfig
+const getConfig = () => window.location.hostname.startsWith('localhost')
+? devConfig
+: prodConfig
 
 const socket = io(getConfig().appURL)
 
